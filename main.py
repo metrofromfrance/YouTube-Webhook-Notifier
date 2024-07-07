@@ -1,9 +1,8 @@
 import requests
 from googleapiclient.discovery import build
 
-# YouTube Data API setup
-api_key = 'YOUR_YOUTUBE_API_KEY'
-webhook_url = 'YOUR_WEBHOOK_URL'
+api_key = os.getenv('YOUTUBE_API_KEY')
+webhook_url = os.getenv('WEBHOOK_URL')
 channels_file = 'channels.txt'
 
 youtube = build('youtube', 'v3', developerKey=api_key)
@@ -35,7 +34,7 @@ def read_channel_ids(file_path):
 
 if __name__ == "__main__":
     channel_ids = read_channel_ids(channels_file)
-    
+
     for channel_id in channel_ids:
         try:
             channel_name = get_channel_name(channel_id)
